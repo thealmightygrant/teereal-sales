@@ -1,7 +1,40 @@
-{{> header}}
-<body>
-  <h1>Welcome to TEEREAL</h1>
-  <h2>Where the realtors do the searching</h2>
-  <p>Now hosted on Amazon S3!</p>
-</body>
-{{> footer}}
+{{META
+  title="The TeeReal Homepage"
+  description="The place where realtors bid on the right to represent you."
+  keywords="real estate, realtor, homeowner, home, residential, neighborhood"
+}}
+
+{{INCLUDESCRIPT
+  name="main"
+  location="js/main.js"
+}}
+
+<div class="page-content-container">
+  <div class="page-content">
+    <div class="slide-container">
+      <div class="slide-panel left-panel">
+        <div class="slide-panel-content-container left-panel .clear-fix">
+          <h2>Sell More Houses</h2>
+          {{#MULTICOLUMN num=3}}
+          {{#COLUMN i=1}}
+          <h2>Something amazing</h2>
+          {{/COLUMN}}
+          {{#COLUMN i=2}}
+          <h2>Something amazing</h2>
+          {{/COLUMN}}
+          {{#COLUMN i=3}}
+          <h2>Something amazing</h2>
+          {{/COLUMN}}
+          {{/MULTICOLUMN}}
+        </div>
+        {{PANELCONTROLS}}
+      </div>
+      <div class="slide-panel center-panel">
+        {{PANELCONTROLS}}
+      </div>
+      <div class="slide-panel right-panel">
+        {{PANELCONTROLS}}
+      </div>
+    </div>
+  </div>
+</div>
