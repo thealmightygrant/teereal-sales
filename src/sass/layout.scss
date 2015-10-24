@@ -4,19 +4,18 @@
 $font-weight-body: 300;
 
 //FONT SIZES
-$font-size-body: 18px;
-$font-size-page-title: 53px;
-$font-size-page-subtitle: 22px;
-$font-size-page-inner-subtitle: 24px;
-$font-size-cta-btn: 21px;
-$font-size-nav-main-link: 15px;
-$font-size-customer-name: 32px;
+$font-size-body: 16px;
+$font-size-body-header: 45px;
+$font-size-body-subheader: 24px;
+$font-size-small-link: 13px;
+$font-size-logo: 32px;
 
 //FONT FAMILIES
 $font-family-body: Nunito,verdana,arial,sans-serif;
 
 //BOX SIZES
 
+$top-bar-height: 95px;
 $width-main-small-tablet-portrait: 650px;
 $width-main-small-tablet-landscape: 800px;
 $width-main-large-tablet-portrait: 750px;
@@ -27,6 +26,47 @@ $width-main-monitor: 1200px;
 //
 $column-margin: 1.5%;
 
+a, a *, button, label, option, select {
+    cursor: pointer;
+}
+
+p, a, button, label, input, h1, h2, h3, h4, h5, h6 {
+    font-family: $font-family-body;
+    font-weight: $font-weight-body;
+}
+
+p, a {
+    font-size: $font-size-small-link;
+    color: black;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+h1 {
+    font-size: $font-size-body-header;
+}
+
+h2 {
+    font-size: $font-size-body-subheader;
+}
+
+
+#top-bar-logo {
+    font-size: $font-size-logo;
+    display: inline-block;
+    margin: 26px 20px 0 0;
+    width: 120px;
+    vertical-align: middle;
+    color: white;
+    float: left;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
 
 body {
     background-color: #e3e3e3;
@@ -38,21 +78,46 @@ body {
 
     &:before {
         width: 100%;
-        height: 95px;
+        height: $top-bar-height;
         content: "";
         position: absolute;
         top: 0;
         left: 0;
-        background-color: white;
+        background-color: royalblue;
     }
 }
 
 .top-bar-container {
     //TODO: make this auto so that it changes based on content in bar
-    height: 95px; 
+    height: $top-bar-height; 
     width: auto;
     margin-left: auto;
     margin-right: auto;
+
+    .login-container {
+        margin-top: 10px;
+        float: right;
+    }
+
+    .login-message a {
+        color: white;
+        line-height: 2 * $font-size-small-link;
+    }
+}
+
+.divider {
+    height: 30px;
+    background-color: grey;
+    padding: 15px 0;
+}
+
+.value-grid {
+    background-color: whitesmoke;
+    .value-grid-container {
+        .column {
+            background-color: lime;
+        }
+    }
 }
 
 .site-container {
@@ -61,6 +126,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     text-align: left;
+
 }
 
 .slide-container {
@@ -75,6 +141,11 @@ body {
     top: 0;
     height: 470px;
     transition: all 0.5s cubic-bezier(0.77,0,0.175,1);
+
+    &.left-panel {
+        background-color: #4cbe7b;
+        h1, h2, p, a { color: white; }
+    }
 }
 
 .slide-panel-content-container {
@@ -83,16 +154,18 @@ body {
     box-sizing: border-box;
     padding: 40px;
 
-    h2 {
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-        margin-bottom: 10px;
-        margin-top: 0;
-        font-size: 45px;
-        font-weight: 300;
+    p {
+        width: 85%;
+        margin: 0 auto 30px;
     }
 }
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
 
 .tagline {
     display: inline-block;
@@ -105,14 +178,11 @@ body {
     float: left;
 }
 
-
-
 .clear-fix {
     content: " ";
     display: block;
     height: 0;
     clear: both;
-    visibility: hidden;
 }
 
 html {
@@ -143,12 +213,7 @@ html {
     width: (100% / 2) - ($column-margin / 2);
 }
 
-.multicolumn-3 .column-1 {
-    @extend %column;
-    width: (100% / 3) - (2 * $column-margin / 3);
-    margin-left: $column-margin;
-}
-
+.multicolumn-3 .column-1,
 .multicolumn-3 .column-2 {
     @extend %column;
     width: (100% / 3) - (2 * $column-margin / 3);
@@ -159,6 +224,20 @@ html {
     @extend %column;
     width: (100% / 3) - (2 * $column-margin / 3);
 }
+
+.multicolumn-4 .column-1,
+.multicolumn-4 .column-2,
+.multicolumn-4 .column-3 {
+    @extend %column;
+    width: (100% / 4) - (3 * $column-margin / 4);
+    margin-left: $column-margin;
+}
+
+.multicolumn-4 .column-4 {
+    @extend %column;
+    width: (100% / 4) - (3 * $column-margin / 4);
+}
+
 
 //responsive sizes
 

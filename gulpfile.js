@@ -98,7 +98,7 @@ function _panel_controls(info){
     '<div class="slide-container-control-circles-inner">' + 
     '<div class="control-circle left-control-circle"></div>' + 
     '<div class="control-circle middle-control-circle"></div>' + 
-        '<div class="control-circle right-control-circle active-control-circle"></div>';
+    '<div class="control-circle right-control-circle active-control-circle"></div></div></div>';
 
   return new hbars.SafeString(html);
 }
@@ -121,7 +121,7 @@ function _column(info){
   opts.cls || (opts.cls = '')
   
   if(opts.i){
-    html = '<div class="' + opts.cls + ' column-' + opts.i + '">' + 
+    html = '<div class="' + opts.cls + ' column column-' + opts.i + '">' + 
              info.fn(this) + '</div>'
   }
   
