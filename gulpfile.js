@@ -142,7 +142,7 @@ gulp.task('sass', function () {
 })
  
 gulp.task('html', function () {
-  return gulp.src('src/templates/**/*.hbs')
+  gulp.src('src/templates/**/*.hbs')
     .pipe(wrap.header('./src/partials/header.hbs'))
     .pipe(wrap.footer('./src/partials/footer.hbs'))
     .pipe(build_page)
