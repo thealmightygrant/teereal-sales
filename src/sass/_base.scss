@@ -24,3 +24,26 @@ h1 {
 h2 {
     font-size: $font-size-body-subheader;
 }
+
+html {
+    overflow-y: scroll;
+}
+
+::selection {
+    background: #ffff99;
+    color: #686800;
+    text-shadow: none;
+}
+
+.clear-fix {
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}

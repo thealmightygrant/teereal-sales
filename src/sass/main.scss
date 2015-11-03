@@ -1,4 +1,5 @@
 @import 'constants';
+@import 'general_use';
 @import 'base';
 
 //NORMAL LAPTOP/DESKTOP ~1280x800 PIXELS */
@@ -106,13 +107,6 @@ body {
     }
 }
 
-.center {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-
 .tagline {
     display: inline-block;
     margin: 39px 0;
@@ -123,67 +117,6 @@ body {
     color: #999999;
     float: left;
 }
-
-.clear-fix {
-    content: " ";
-    display: block;
-    height: 0;
-    clear: both;
-}
-
-html {
-    overflow-y: scroll;
-}
-
-::selection {
-    background: #ffff99;
-    color: #686800;
-    text-shadow: none;
-}
-
-%column {
-    display: inline-block;
-    box-sizing: border-box;
-    vertical-align: top;
-    padding: 1%;
-}
-
-.multicolumn-2 .column-1 {
-    @extend %column;
-    width: (100% / 2) - ($column-margin / 2);
-    margin-left: $column-margin;
-}
-
-.multicolumn-2 .column-2 {
-    @extend %column;
-    width: (100% / 2) - ($column-margin / 2);
-}
-
-.multicolumn-3 .column-1,
-.multicolumn-3 .column-2 {
-    @extend %column;
-    width: (100% / 3) - (2 * $column-margin / 3);
-    margin-left: $column-margin;
-}
-
-.multicolumn-3 .column-3 {
-    @extend %column;
-    width: (100% / 3) - (2 * $column-margin / 3);
-}
-
-.multicolumn-4 .column-1,
-.multicolumn-4 .column-2,
-.multicolumn-4 .column-3 {
-    @extend %column;
-    width: (100% / 4) - (3 * $column-margin / 4);
-    margin-left: $column-margin;
-}
-
-.multicolumn-4 .column-4 {
-    @extend %column;
-    width: (100% / 4) - (3 * $column-margin / 4);
-}
-
 
 //responsive sizes
 
