@@ -1,0 +1,26 @@
+a, a *, button, label, option, select {
+    cursor: pointer;
+}
+
+p, a, button, label, input, h1, h2, h3, h4, h5, h6 {
+    font-family: $font-family-body;
+    font-weight: $font-weight-body;
+}
+
+p, a {
+    font-size: $font-size-small-link;
+    color: black;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+h1 {
+    font-size: $font-size-body-header;
+}
+
+h2 {
+    font-size: $font-size-body-subheader;
+}
