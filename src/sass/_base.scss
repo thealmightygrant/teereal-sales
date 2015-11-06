@@ -47,3 +47,11 @@ html {
     margin-right: auto;
     text-align: center;
 }
+
+div, img, section {
+    box-sizing: border-box;
+}
+
+a, a *, button, label, option, select, .btn, .img-link {
+    cursor: pointer;
+}

@@ -7,6 +7,9 @@ var gulp = require('gulp')
 , sass = require('gulp-sass')
 , rename = require('gulp-rename')
 , plumber = require('gulp-plumber')
+, connect = require('gulp-connect')
+, rimraf = require('gulp-rimraf')
+, debug = require('gulp-debug')
 , wrap = require('gulp-headerfooter')
 , site_config = require('config')
 , hbars = require('handlebars')
@@ -31,6 +34,8 @@ function build_html(file) {
   hbars.registerHelper('PANELCONTROLS', _panel_controls)
   hbars.registerHelper('MULTICOLUMN', _multi_column)
   hbars.registerHelper('COLUMN', _column)
+  hbars.registerHelper('IMAGELINK', _img_link)
+  hbars.registerHelper('BUTTON', _button)
   
   // INFO ONLY HELPERS
   hbars.registerHelper('META', __meta)
@@ -92,15 +97,41 @@ function update_meta(rendered, meta){
 }
 
 function _panel_controls(info){
-  var html = '<div class="slide-container-arrow slide-container-arrow-left slide-container-arrow-left-green"></div>' +
-    '<div class="slide-container-arrow slide-container-arrow-right slide-container-arrow-right-green"></div>' + 
-    '<div class="slide-container-control-circles">' + 
-    '<div class="slide-container-control-circles-inner">' + 
-    '<div class="control-circle left-control-circle"></div>' + 
-    '<div class="control-circle middle-control-circle"></div>' + 
-    '<div class="control-circle right-control-circle active-control-circle"></div></div></div>';
+  var left_arrow = '<div class="slide-container-arrow slide-container-arrow-left slide-container-arrow-left-green"></div>'
+  var right_arrow = '<div class="slide-container-arrow slide-container-arrow-right slide-container-arrow-right-green"></div>'
+  
+  var control_circles = '<div class="slide-container-control-circles">' + 
+        '<div class="slide-container-control-circles-inner">' + 
+        '<div class="control-circle left-control-circle"></div>' + 
+        '<div class="control-circle middle-control-circle"></div>' + 
+        '<div class="control-circle right-control-circle active-control-circle"></div>' +
+        '</div></div>'
 
-  return new hbars.SafeString(html);
+  return new hbars.SafeString(left_arrow + right_arrow + control_circles);
+}
+
+function _img_link(info){
+  var opts = info.hash;
+  opts.img || (opts.img = "/img/default-house.png")
+  opts.href || (opts.href = "/browse/houses")
+
+  var html = '<a href="' + opts.href + '" class="img-link">' +
+        '<img src="' + opts.img + '" class="' + opts.cls + '">' + '</a>';
+
+  return new hbars.SafeString(html);  
+}
+
+function _button(info){
+  var opts = info.hash;
+  opts.href || (opts.href = "/browse/houses")
+  opts.cls || (opts.cls = "default-btn")
+  opts.text || (opts.text = '')
+
+  var html = '<div class="btn ' + opts.cls + '">' +
+        '<a href="' + opts.href + '" class="btn-link">' + opts.text +
+             '</a>' + '</div>';
+
+  return new hbars.SafeString(html);  
 }
 
 function _multi_column(info){
@@ -127,42 +158,78 @@ function _column(info){
   
   return new hbars.SafeString(html);
 }
-  
-gulp.task('js', function () {
-  gulp.src('./src/js/**/*.js')
-    .pipe(gulp.dest('./dist/js'))
+
+gulp.task('js-clean', function () {
+  gulp.src('dist/js/**/*.js', {read: false}).pipe(rimraf())
 })
 
+gulp.task('js', ['js-clean'], function () {
+  gulp.src('./src/js/**/*.js')
+    .pipe(gulp.dest('./dist/js'))
+    .pipe(connect.reload())
+})
 
-gulp.task('sass', function () {
+gulp.task('assets-clean', function () {
+  gulp.src(['dist/img'], {read: false}).pipe(rimraf())
+})
+
+gulp.task('assets', ['assets-clean'], function () {
+  gulp.src('./assets/**')
+    .pipe(gulp.dest('./dist/'))
+})
+
+gulp.task('css-clean', function () {
+  gulp.src('dist/css/**/*.css', {read: false}).pipe(rimraf())
+})
+
+gulp.task('sass', ['css-clean'], function () {
   gulp.src('./src/sass/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(rename({extname: '.css'}))
     .pipe(gulp.dest('./dist/css'))
+    .pipe(connect.reload())
+})
+
+gulp.task('html-clean', function () {
+  gulp.src(['dist/*','!dist/css','!dist/js','!dist/img'], {read: false}).pipe(rimraf())
 })
  
-gulp.task('html', function () {
+gulp.task('html', ['html-clean'], function () {
   gulp.src('src/templates/**/*.hbs')
     .pipe(wrap.header('./src/partials/header.hbs'))
     .pipe(wrap.footer('./src/partials/footer.hbs'))
     .pipe(build_page)
     .pipe(rename({extname: '.html'}))
     .pipe(gulp.dest('dist'))
+    .pipe(connect.reload())
 })
 
-gulp.task('sass:watch', function () {
+gulp.task('connect', function() {
+  connect.server({
+    port: 8000,
+    root: 'dist/',
+    livereload: true
+  });
+});
+
+gulp.task('sass:watch', ['sass'], function () {
   gulp.watch('./src/sass/**/*.scss', ['sass']);
 })
 
-gulp.task('html:watch', function () {
+gulp.task('html:watch', ['html'], function () {
   gulp.watch('./src/**/*.hbs', ['html']);
 })
 
-gulp.task('js:watch', function () {
+gulp.task('js:watch', ['js'], function () {
   gulp.watch('./src/js/**/*.js', ['js']);
 })
 
+gulp.task('assets:watch', ['assets'], function () {
+  gulp.watch('./assets/**/*.*', ['assets']);
+})
 
-gulp.task('watch', ['sass:watch', 'html:watch', 'js:watch'])
+gulp.task('watch', ['sass:watch', 'html:watch', 'js:watch', 'assets:watch'])
 
-gulp.task('default', ['html', 'js', 'sass'])
+gulp.task('default', ['html', 'js', 'sass', 'assets'])
+
+gulp.task('serve', ['watch', 'connect'])
