@@ -84,9 +84,18 @@ body {
     height: 470px;
     transition: all 0.5s cubic-bezier(0.77,0,0.175,1);
 
+    &.center-panel {
+        left: 0;
+    }
+    
     &.left-panel {
+        left: -100%;
         background-color: #4cbe7b;
         h1, h2, p, a { color: white; }
+    }
+
+    &.right-panel {
+        left: 100%;
     }
 }
 
