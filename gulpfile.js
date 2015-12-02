@@ -8,12 +8,18 @@ var gulp = require('gulp')
 , debug = require('gulp-debug')
 , wrap = require('gulp-headerfooter')
 , through2 = require('through2')
+, browserify = require('browserify')
+, merge_stream = require('merge-stream')
+, src_stream = require('vinyl-source-stream')
+, watchify = require('watchify')
+// L==> for use with browserify during watch, see http://tylermcginnis.com/reactjs-tutorial-pt-2-building-react-applications-with-gulp-and-browserify/
+, uglify = require('gulp-uglify')
 , build_html = require('./_gulp/compile')
 
 var build_page = function(chunk, encoding, next) {
     var html = build_html(chunk)
     this.push(html);
-    next(); //AKA done
+    next(); 
 };
 
 gulp.task('js-clean', function () {
@@ -21,9 +27,18 @@ gulp.task('js-clean', function () {
 })
 
 gulp.task('js', ['js-clean'], function () {
-  gulp.src('./src/js/**/*.js')
+  //var dynamic_stream = 
+  browserify('./src/js/main.js')
+    .bundle()
+  //.pipe(uglify()) //NOTE: only for production
+    .pipe(src_stream('main.js'))
     .pipe(gulp.dest('./dist/js'))
     .pipe(connect.reload())
+  
+  //var static_stream = gulp.src('./src/js/vendor/*.js')
+  //      .pipe(gulp.dest('./dist/js'))
+
+  //return merge_stream(dynamic_stream, static_stream);
 })
 
 gulp.task('assets-clean', function () {

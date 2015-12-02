@@ -102,6 +102,49 @@ body {
     }
 }
 
+.slide-container-arrow {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    position: absolute;
+    top: 125px;
+    border: rgba(white, 0.1) 1px solid;
+    border-radius: 35px;
+
+    &.slide-container-arrow-left {
+        left: 10px;
+        &:before {
+            content: "\2190";
+            left: 14px;
+            top: 10px;
+            position: absolute;
+        }
+    }
+    &.slide-container-arrow-right {
+        right: 10px;
+        &:before {
+            content: "\2192";
+            right: 14px;
+            top: 10px;
+            position: absolute;
+        }
+    }
+    &:before {
+        font-size: 40px;
+        font-weight: 100;
+        color: rgba(white, 0.2);
+    }
+}
+
+.split {
+    &.split-horizontal .split-pane {
+        float: left;
+        width: 50%;
+        height: 100%;
+        display: block;
+    }
+}
+
 .tagline {
     display: inline-block;
     margin: 39px 0;

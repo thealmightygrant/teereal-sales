@@ -33,6 +33,16 @@
         {{PANELCONTROLS}}
       </div>
       <div class="slide-panel center-panel">
+        <div class="slide-panel-content-container center-panel clear-fix">
+          {{#SPLIT}}
+          <div class="left-split-pane split-pane">
+            <h1 class="center">Sell More Houses</h1>
+          </div>
+          <div class="right-split-pane split-pane">
+            <h1 class="center">Sell More Houses</h1>
+          </div>
+          {{/SPLIT}}
+        </div>
         {{PANELCONTROLS}}
       </div>
       <div class="slide-panel right-panel">
@@ -45,12 +55,12 @@
     <div class="value-grid">
       <div class="value-grid-container clear-fix">
         <h2 class="center">Find Houses to Sell Now</h2>
-        <p class="center">You bid on a house and we'll do the rest. No more cold calls. Only actual leads.</p> 
-        {{#MULTICOLUMN num=4}}
+        <p class="center">You bid on a house and we'll do the rest. No more cold calls. Only actual leads.</p>
+        {{#MULTICOLUMN}}
         {{#COLUMN i=1}}
         <div class="tile row1">
           {{IMAGELINK cls="tile-img"}}
-          {{BUTTON text="1024 Elm Street, Boulder, CO" cls="btn-small"}}
+          {{BUTTON text="555 Maple Street, Boulder, CO" cls="btn-small"}}
         </div>
         <div class="tile row2">
           {{IMAGELINK cls="tile-img"}}
