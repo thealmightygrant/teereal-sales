@@ -79,8 +79,8 @@ function update_meta(rendered, meta){
 }
 
 function _panel_controls(info){
-  var left_arrow = '<div class="slide-container-arrow slide-container-arrow-left slide-container-arrow-left-green"></div>'
-  var right_arrow = '<div class="slide-container-arrow slide-container-arrow-right slide-container-arrow-right-green"></div>'
+  var left_arrow = '<div class="slide-container-arrow slide-container-arrow-left"></div>'
+  var right_arrow = '<div class="slide-container-arrow slide-container-arrow-right"></div>'
   
   var control_circles = '<div class="slide-container-control-circles">' + 
         '<div class="slide-container-control-circles-inner">' + 

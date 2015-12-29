@@ -1,4 +1,4 @@
-controls = require('./controls.js')
+controls = require('./controls')
 
 
 
