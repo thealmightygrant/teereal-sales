@@ -98,7 +98,7 @@ function _img_link(info){
   opts.href || (opts.href = "/browse/houses")
 
   var html = '<a href="' + opts.href + '" class="img-link">' +
-        '<img src="' + opts.img + '" class="' + opts.cls + '">' + '</a>';
+        '<div style="background-position: 0px 0px; display: inline-block; background-repeat: no-repeat; background-image: url(\'' + opts.img + '\');" class="' + opts.cls + '"></div>' + '</a>';
 
   return new hbars.SafeString(html);  
 }
