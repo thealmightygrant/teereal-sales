@@ -178,6 +178,10 @@ body {
     background-color: $green-swatch;
 }
 
+.black {
+    background-color: black;
+}
+
 .slide-container-arrow {
     width: 70px;
     height: 70px;
@@ -271,11 +275,24 @@ body {
 }
 
 .catch-you-later-panel {
-    height: 350px;
+    height: 250px;
+    padding: 5%;
     
     .split-pane {
         height: 200px;
     }
+}
+
+.why-us-panel {
+    height: 200px;
+    padding: 3%;
+    background-color: rgba(whitesmoke, 0.5);
+}
+
+.faq-panel {
+    height: 250px;
+    padding: 3%;
+    background-color: rgba(darkgrey, 0.8);
 }
 
 //responsive sizes
